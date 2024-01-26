@@ -1,10 +1,26 @@
-const {test, expect, chromium} = require("@playwright/test");
+//Old js version
+//const {test, expect, chromium} = require("@playwright/test");
+
+//New js version
+import{test as myTest, expect, chromium} from "@playwright/test";
+
+//Playwright import
+import { counterFunction } from "./counter.js";
+
+import Homepage from "./Homepage.js";
 
 
 //dou vacancies
-test('Календар page', async({page}) => {
+myTest('Календар page', async({page}) => {
     await page.goto("https://jobs.dou.ua/");
-    await page.getByRole('link', { name: 'Календар' }).click();
+
+    //Work like implicit wait - till the end of timeout
+    //await page.waitForTimeout(5000);
+
+    //Worl like Explixit wait - if element will be found faster, then click will be perfirmed
+    //without waiting till the time will end
+    await page.getByRole('link', { name: 'Календар' }).click({timeout: 5000});
+    //console.log(counterFunction(5,5));
 
     await expect(page).toHaveURL("https://dou.ua/calendar/");
     await expect(page).toHaveTitle("Календар IT-подій | DOU");
@@ -12,7 +28,7 @@ test('Календар page', async({page}) => {
     await page.close();
 })
 
-test('dou jobs combobox contain search word', async() => {
+myTest('dou jobs combobox contain search word', async() => {
     let browser = await chromium.launch();
     const page = await browser.newPage();
 
@@ -27,11 +43,17 @@ test('dou jobs combobox contain search word', async() => {
     await browser.close();
 })
 
-test('test contains Odessa location', async() => {
+myTest('test contains Odessa location', async() => {
     let browser = await chromium.launch();
     const page = await browser.newPage();
 
     await page.goto("https://jobs.dou.ua/");
+    await page.pause();
+
+    //Use as page object
+    // let homepage = new Homepage(page);
+    // await homepage.clickLink();
+
     await page.getByRole('link', { name: 'Project Manager', exact: true }).click();
     await page.getByRole('link', { name: 'Без досвіду' }).click();
     
