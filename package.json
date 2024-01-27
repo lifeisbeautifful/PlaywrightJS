@@ -6,7 +6,7 @@
   "scripts": {
     "test":"playwright test --config=playwright.config.js --debug"
   },
- "screenshot":"on-test-filure",
+ "screenshot":"on-test-failure",
   "keywords": [],
   "author": "",
   "license": "ISC",
