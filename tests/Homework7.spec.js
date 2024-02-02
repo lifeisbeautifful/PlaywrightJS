@@ -1,17 +1,17 @@
+import{test, expect, chromium} from "@playwright/test";
+
 //Old js version
 //const {test, expect, chromium} = require("@playwright/test");
 
 //New js version
-import{test as myTest, expect, chromium} from "@playwright/test";
+//import{test, expect, chromium} from "@playwright/test";
 
 //Playwright import
-import { counterFunction } from "./counter.js";
-
-import Homepage from "./Homepage.js";
+import { counterFunction } from "./train/counter.js";
 
 
 //dou vacancies
-myTest('Календар page', async({page}) => {
+test('Календар page', async({page}) => {
     await page.goto("https://jobs.dou.ua/");
 
     //Work like implicit wait - till the end of timeout
@@ -28,7 +28,7 @@ myTest('Календар page', async({page}) => {
     await page.close();
 })
 
-myTest('dou jobs combobox contain search word', async() => {
+test('dou jobs combobox contain search word', async() => {
     let browser = await chromium.launch();
     const page = await browser.newPage();
 
@@ -43,7 +43,7 @@ myTest('dou jobs combobox contain search word', async() => {
     await browser.close();
 })
 
-myTest('test contains Odessa location', async() => {
+test('test contains Odessa location', async() => {
     let browser = await chromium.launch();
     const page = await browser.newPage();
 
